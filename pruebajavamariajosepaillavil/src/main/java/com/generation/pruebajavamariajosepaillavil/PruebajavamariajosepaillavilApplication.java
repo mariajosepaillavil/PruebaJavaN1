@@ -8,6 +8,9 @@ import java.util.HashMap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.generation.pruebajavamariajosepaillavil.models.Alumno;
+import com.generation.pruebajavamariajosepaillavil.models.Curso;
+import com.generation.pruebajavamariajosepaillavil.models.Materia;
+import com.generation.pruebajavamariajosepaillavil.models.Profesores;
 
 @SpringBootApplication
 public class PruebajavamariajosepaillavilApplication {
@@ -46,15 +49,16 @@ generation.chilec4@gmail.com con el siguiente asunto
 ○ Evaluación JAVA Objetos - <Nombre Apellido
 
 *************************************************************
+IMPORTANTE:
 
 STEPS: PRUEBA 
-1.CREAR FUNCIÓN QUE PERMITA QUE EL PROFESOR INGRESE NOTAS POR ESTUDIANTE
-2.OBTENER PROMEDIO POR ESTUDIANTE EN BASE A LAS NOTAS ANTERIORMENTE INGRESADAS POR EL PROFESOR
-3.CREAR FUNCIÓN QUE CONTENGA ARREGLO NOTAS DE CIERTA CANTIDAD DE ALUMNOS POR CURSO
-4.IMPRIMIR EN PANTALLA, EL ARREGLO RESULTANTE
-5.IDENTIFICAR E IMPRIMIR LA MEJOR NOTA DEL ARREGLO
-6.IDENTIFICAR E IMPRIMIR LA PEOR NOTA DEL ARREGLO
-7.CALCULAR E IMPRIMIR EL PROMEDIO DE NOTAS DEL CURSO
+1.CREAR FUNCIÓN QUE PERMITA QUE EL PROFESOR INGRESE NOTAS POR ESTUDIANTE // MEDIANTE UN SCANNER
+2.OBTENER PROMEDIO POR ESTUDIANTE EN BASE A LAS NOTAS ANTERIORMENTE INGRESADAS POR EL PROFESOR // CREAR ARRAYLIST QUE CONTENGA LOS REGISTROS DEL USUARIO
+3.CREAR FUNCIÓN QUE CONTENGA ARREGLO NOTAS DE CIERTA CANTIDAD DE ALUMNOS POR CURSO // LA LONGITUD DEL ARRAYLIST ESTARÁ DETERMINADA POR LA CANTIDAD DE NOTAS INGRESADAS INICIALMENTE POR EL USUARIO
+4.IMPRIMIR EN PANTALLA, EL ARREGLO RESULTANTE // CON UN SYSTEM.OUT.PRINTINT(); --> EQUIVALENTE A CONSOLE.LOG () DE JAVASCRIPT
+5.IDENTIFICAR E IMPRIMIR LA MEJOR NOTA DEL ARREGLO // SE INTENTARÁ CON MATH.MAX  
+6.IDENTIFICAR E IMPRIMIR LA PEOR NOTA DEL ARREGLO // SE INTENTARÁ CON MATH.MIN
+7.CALCULAR E IMPRIMIR EL PROMEDIO DE NOTAS DEL CURSO // SUMATORIA DE LAS NOTAS DE CADA ESTUDIANTE, DIVIDIDA EN EL TOTAL DE ALUMNOS REGISTRADOS POR EL USUARIO
 
 PD: QUE LA FUERZA NOS ACOMPAÑE!! D:
 
@@ -154,7 +158,7 @@ public static void sobrePromedio(Double promedioGeneral, ArrayList<Double> notas
 				String opciones = teclado.nextLine();
 				if(opciones.equals("1")){
 
-
+			//INICIO OBJETO: ALUMNO (CLASE PADRE)		
 					Alumno alumnoColegio = new Alumno();
 
 					System.out.println("Favor ingrese curso del estudiante");
@@ -173,10 +177,30 @@ public static void sobrePromedio(Double promedioGeneral, ArrayList<Double> notas
 					System.out.println("Favor indique nombre del Profesor jefe");
 					String profesorAlumno=teclado.nextLine();
 					alumnoColegio.setProfesor(profesorAlumno);
-					System.out.println("Favor ingrese arreglo de notas");
+					
 
-					//Iniciamos un búcle "for", que nos permita ir recorriendo el arreglo que engloba a los estudiantes ingresados por el usuario
-		
+					
+		     // INICIO OBJETO: CURSO (CLASE HIJA)
+					Curso cursoColegio = new Curso();
+					System.out.println("Favor ingrese la jornada de estudios en la que asiste el estudiante");
+					String jornadaCurso=teclado.nextLine();
+					cursoColegio.setJornada(jornadaCurso);
+
+			//INICIO OBJETO:MATERIA	(CLASE HIJA)	
+					Materia materiaColegio = new Materia();
+					System.out.println("Favor indique las veces por semana que tiene la materia antes indicada");
+					Integer vecesPorSemanaCurso=teclado.nextInt();
+					materiaColegio.setVecesPorSemana(vecesPorSemanaCurso);
+
+			//INICIO OBJETO: PROFESORES (CLASE HIJA)		
+				Profesores profesoresColegio = new Profesores();
+				System.out.println("Favor indique en números la edad del/x profesor/x");
+				Integer edadProfesorCurso=teclado.nextInt();
+				profesoresColegio.setEdadProfesor(edadProfesorCurso);
+
+			System.out.println("Favor ingrese arreglo de notas");
+					teclado.nextLine();	
+
 					Double sumaNota=0.0;
 					Double sumaPromedioGeneral=0.0;
 					Double promedioGeneralOk=0.0;
@@ -229,9 +253,28 @@ public static void sobrePromedio(Double promedioGeneral, ArrayList<Double> notas
 				
 				System.out.println("***************************  RESUMEN ****************************");
 	
-				System.out.println("Este es el detalle del estudiante N°: " + i + " " + alumnoColegio.toString());
-	
+				System.out.println("Este es el detalle obj. alumno del estudiante Número: " + i + " " + alumnoColegio.toString());
+				System.out.println("Este es el detalle obj. curso del estudiante Número: " + i + " " + cursoColegio.toString());
+				System.out.println("Este es el detalle obj. materia del estudiante Número: " + i + " " + materiaColegio.toString());
+				System.out.println("Este es el detalle obj. profesores del estudiante Número: " + i + " " + profesoresColegio.toString());
 							 
+				System.out.println("************* ATENCIÓN: SE INTENTÓ OBTENER LA NOTA MÁXIMA Y MÍNIMA DEL ARREGLO MEDIANTE MATH.MAX | MIN *************");
+				
+				int[] arregloNotas = new int[cantNotas];
+
+        for (int k = 0; k < cantNotas; k++) {
+            arregloNotas[k]= teclado.nextInt();
+        }
+
+        int numeroMayor = arregloNotas[0];
+		
+        for (int k = 1; k < cantNotas; k++) {
+			int notaMayor=teclado.nextInt();
+            notaMayor = Math.max(notaMayor, arregloNotas[k]);
+
+			System.out.println("El número mayor en el arreglo es: " + notaMayor);
+        }
+
 				} 
 	
 			
@@ -281,4 +324,4 @@ public static void sobrePromedio(Double promedioGeneral, ArrayList<Double> notas
 
 }
 
-	//}
+	
